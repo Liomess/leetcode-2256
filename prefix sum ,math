@@ -1,0 +1,26 @@
+class Solution:
+    def minimumAverageDifference(self, nums: List[int]) -> int:
+        prearr=[]
+        val=0
+        n=1
+        for i in nums:
+            val+=i
+            v=val//n
+            n+=1
+            prearr.append(v)
+        sufarr=[]
+        n=1
+        val=0
+        for i in range(len(nums)-1,-1,-1):
+            val+=nums[i]
+            v=val//n
+            n+=1
+            sufarr.append(v)
+        sufarr=sufarr[::-1]
+        sufarr.append(0)
+        ans=[-1]*len(nums)
+        for i in range(len(nums)):
+            ans[i]=abs(prearr[i]-sufarr[i+1])
+        num=min(ans)
+        return ans.index(num)
+
